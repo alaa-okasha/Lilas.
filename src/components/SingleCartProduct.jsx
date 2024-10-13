@@ -23,24 +23,24 @@ function SingleCartProduct({
   return (
     <>
       <tr className="font-poppins text-sm text-gray-500">
-        <td className="flex flex-col lg:flex-row lg:justify-between lg:space-x-4 space-y-4 lg:space-y-0 pt-16">
+        <td className="flex flex-row lg:justify-between lg:space-x-4 space-y-4 lg:space-y-0 pt-16">
           {/* Product Info */}
-          <div className="flex flex-col lg:flex-row lg:space-x-6 space-y-4 lg:space-y-0 w-full lg:w-1/6">
+          <div className="flex flex-col lg:flex-row lg:space-x-6 space-y-4 lg:space-y-0 w-1/3 lg:w-1/6">
             <img
               className="w-24 h-24 lg:w-32 lg:h-32 border-2 border-solid border-gray-200"
               src={cartProduct.ProductImg}
               alt=""
             />
             <div className="flex flex-col space-y-3">
-              <span className="text-center lg:text-left">
+              <span className="text-left">
                 {cartProduct.ProductName}
               </span>
-              <span className="text-center lg:text-left">{`LE ${cartProduct.ProductPrice}`}</span>
+              <span className="text-left">{`LE ${cartProduct.ProductPrice}`}</span>
             </div>
           </div>
 
           {/* Quantity Control */}
-          <div className="flex flex-row justify-between items-center space-x-4 lg:w-1/6 w-full">
+          <div className="flex flex-row sm:items-start ml-12 space-x-4 lg:w-1/6 w-2/3">
             <div className="flex justify-evenly items-center border-2 border-gray-300 py-2 lg:py-3 h-12 lg:h-1/3 w-full lg:w-3/4">
               <button
                 className={`font-bold py-2 px-2 rounded ${
@@ -61,13 +61,13 @@ function SingleCartProduct({
                 +
               </button>
             </div>
-            <button className="text-red-700" onClick={handelCartProductDelete}>
+            <button className="text-red-700 flex flex-col items-center pt-4" onClick={handelCartProductDelete}>
               <FaTrashAlt />
             </button>
           </div>
 
           {/* Product Total Price */}
-          <div className="flex flex-col justify-center items-center lg:text-left text-center lg:w-auto">
+          <div className=" lg:text-left text-right w-1/3 lg:w-auto">
             <span>{`LE ${cartProduct.TotalProductPrice}`}</span>
           </div>
         </td>
