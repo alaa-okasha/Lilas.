@@ -7,6 +7,7 @@ import Cart from "./components/Cart";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Notfound from "./components/Notfound";
+import Checkout from "./components/Checkout";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route exact path="/login" Component={Login} />
           <Route exact path="/signup" Component={Signup} />
           <Route exact path="/cart" Component={Cart} />
+          <Route exact path="/checkout" Component={Checkout} />
           <Route Component={Notfound} />
         </Routes>
       </BrowserRouter>

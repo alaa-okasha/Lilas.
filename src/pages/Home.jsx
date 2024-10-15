@@ -11,6 +11,8 @@ import Parallax from "../components/Parallax.jsx";
 import Modal from "../components/Modal.jsx";
 import Modal2 from "../components/Modal2.jsx";
 import Footer from "../components/Footer.jsx";
+import { ToastContainer, toast, Bounce } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 function Home() {
@@ -21,6 +23,9 @@ function Home() {
 
 
   const [uid, setUid] = useState(null);
+
+    const notify = () => toast.success("The product was added to cart!");
+
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -99,10 +104,7 @@ function Home() {
       // Use setDoc to save the product to Firestore
       setDoc(productRef, Product)
         .then(() => {
-          swal("", "The product was added to your cart", "success", {
-            buttons: false,
-            timer: 2000,
-          });
+          notify();
 
         })
         .catch((error) => {
@@ -128,8 +130,20 @@ function Home() {
       <Parallax />
       <Modal />
       <Modal2 />
-      <Footer/>
-      
+      <Footer />
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+        transition={Bounce}
+      />
     </>
   );
 }

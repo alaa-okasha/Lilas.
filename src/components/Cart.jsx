@@ -15,6 +15,7 @@ function Cart() {
   const [user, setUser] = useState(null);
   const [cartProducts, setCartProducts] = useState([]);
   const [loading, setLoading] = useState(true); // Loading state
+  const navigate = useNavigate();
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (currentUser) => {
@@ -277,7 +278,9 @@ function Cart() {
               taxes and shipping are calculated at checkout
             </div>
             <div className="w-1/2">
-              <button className="w-full py-2 bg-black text-white hover:scale-105 font-poppins">
+              <button className="w-full py-2 bg-black text-white hover:scale-105 font-poppins" onClick={() => {
+                navigate('/checkout');
+              }}>
                 Check out
               </button>
             </div>
