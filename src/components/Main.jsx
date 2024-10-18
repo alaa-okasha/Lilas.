@@ -17,7 +17,7 @@ function main({ addToCart }) {
       <div className="py-6 px-4 sm:px-8 lg:px-20 xl:px-60">
         <div>
           <p className="pl-2 sm:pl-4 lg:pl-6 text-base sm:text-lg lg:text-xl text-gray-600">
-            Lilas signatures; The Pinnacle of Luxurious Elegance
+            Lilas Essence: The Height of Timeless Luxury
           </p>
         </div>
         {loading ? (

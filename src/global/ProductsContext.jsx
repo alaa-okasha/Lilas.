@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
-import { collection, onSnapshot } from "firebase/firestore"; // Modular Firestore imports
-import { db } from "../config/Confij"; // Assuming db is your initialized Firestore instance
+import { collection, onSnapshot } from "firebase/firestore"; 
+import { db } from "../config/Confij"; 
 
 export const ProductsContext = createContext();
 
@@ -8,10 +8,10 @@ export function ProductsContextProvider({ children }) {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    // Reference to the 'Products' collection
+    
     const productsCollectionRef = collection(db, "Products");
 
-    // Real-time listener using onSnapshot
+    
     const unsubscribe = onSnapshot(productsCollectionRef, (snapshot) => {
       const changes = snapshot.docChanges();
       setProducts((prevProducts) => {
@@ -26,7 +26,7 @@ export function ProductsContextProvider({ children }) {
               ProductImg: change.doc.data().ProductImg,
             });
           }
-          // If you want to handle 'modified' and 'removed' as well:
+          
           if (change.type === "modified") {
             const index = updatedProducts.findIndex(
               (product) => product.ProductID === change.doc.id
@@ -51,7 +51,7 @@ export function ProductsContextProvider({ children }) {
       });
     });
 
-    // Cleanup on component unmount to prevent memory leaks
+    
     return () => unsubscribe();
   }, []);
 

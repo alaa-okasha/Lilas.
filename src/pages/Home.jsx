@@ -32,13 +32,13 @@ function Home() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        setUid(user.uid); // Set the UID when user is logged in
+        setUid(user.uid); 
       } else {
-        setUid(null); // Reset UID when user is not logged in
+        setUid(null); 
       }
     });
 
-    // Clean up the listener on unmount
+    
     return () => unsubscribe();
   }, []);
 
@@ -46,10 +46,10 @@ function Home() {
     const unsubscribe = auth.onAuthStateChanged(async (currentUser) => {
       if (currentUser) {
         try {
-          const userDocRef = doc(db, "users", currentUser.uid); // Create doc reference
-          const userSnapshot = await getDoc(userDocRef); // Get the document
+          const userDocRef = doc(db, "users", currentUser.uid); 
+          const userSnapshot = await getDoc(userDocRef); 
           if (userSnapshot.exists()) {
-            setUser(userSnapshot.data().FullName);// Set user FullName to state
+            setUser(userSnapshot.data().FullName);
             
           }
         } catch (error) {
@@ -62,13 +62,13 @@ function Home() {
       
 
 
-    // Clean up subscription to prevent memory leaks
+    
     return () => unsubscribe();
   }, []);
 
   useEffect(() => {
     if (user) {
-      console.log(user); // Log the updated user value
+      console.log(user); 
     }
   }, [user]); 
 
@@ -76,20 +76,20 @@ function Home() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        const cartRef = collection(db, "Cart" + user.uid); // Get reference to Cart collection
+        const cartRef = collection(db, "Cart" + user.uid); 
 
-        // Listen to the cart collection and update the total number of products
+        
         const unsubscribeSnapshot = onSnapshot(cartRef, (snapshot) => {
-          const qty = snapshot.docs.length; // Count the documents in the snapshot
-          setTotalProducts(qty); // Set the total products count in the state
+          const qty = snapshot.docs.length; 
+          setTotalProducts(qty); 
         });
 
-        // Cleanup snapshot listener when the component unmounts
+        
         return () => unsubscribeSnapshot();
       }
     });
 
-    // Cleanup auth listener when the component unmounts
+    
     return () => unsubscribe();
   },[])
 
@@ -103,7 +103,7 @@ function Home() {
       Product['TotalProductPrice'] = Product.qty * Product.ProductPrice;
       const productRef = doc(db, "Cart" + uid, product.ProductID);
 
-      // Use setDoc to save the product to Firestore
+      
       setDoc(productRef, Product)
         .then(() => {
           notify();

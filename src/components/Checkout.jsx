@@ -245,7 +245,7 @@ function Checkout() {
             </form>
           </div>
         </div>
-        <div className="bg-zinc-100 h-screen pl-4 md:pl-16 pr-4 md:pr-16 lg:pr-56 font-poppins pt-16 shadow-xl">
+        <div className="bg-zinc-100 md:h-screen pl-4 md:pl-16 pr-4 md:pr-16 lg:pr-56 font-poppins pt-16 shadow-xl">
           <div className="flex flex-col space-y-4">
             {loading ? (
               <div className="flex justify-center items-center h-full">

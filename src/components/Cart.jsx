@@ -273,7 +273,7 @@ function Cart() {
           </div>
           <div className="w-full md:w-1/2 flex flex-col md:items-end space-y-4 mt-4 md:mt-0 sm:items-start">
             <div className="text-gray-500 flex space-x-3">
-              <span>Total NO of products</span>
+              <span>Total NO products</span>
               <span className="text-lg text-black">{totalQty}</span>
             </div>
             <div className="text-gray-500 flex space-x-3">

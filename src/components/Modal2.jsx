@@ -1,17 +1,12 @@
 import React from 'react'
-import soon from '../assets/soon.webp'
+import soon from '../assets/modal2.jpg'
 
 function Modal2() {
   return (
     <div className="py-6 px-4 sm:px-8 lg:px-20 xl:px-44">
       <div className="container w-full flex flex-col lg:flex-row">
-        <div className="w-full lg:w-1/2 mb-4 lg:mb-0">
-          <img src={soon} alt="" className="w-full h-auto" />
-        </div>
         <div className="flex flex-col justify-center space-y-3 px-4 sm:px-8 lg:px-16 w-full lg:w-1/2 font-poppins mt-4 lg:mt-0">
-          <p className="text-gray-500 text-sm sm:text-base">
-            Pumpkin spice tea
-          </p>
+          <p className="text-gray-500 text-sm sm:text-base">SnowPetal</p>
           <h1 className="text-2xl sm:text-3xl lg:text-4xl">
             Natural fragrance.
           </h1>
@@ -24,6 +19,9 @@ function Modal2() {
           >
             Soon.
           </button>
+        </div>
+        <div className="w-full lg:w-1/2 mt-4 lg:mt-0">
+          <img src={soon} alt="" className="w-full h-auto" />
         </div>
       </div>
     </div>
