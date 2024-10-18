@@ -14,17 +14,18 @@ import Footer from "./Footer.jsx";
 function Cart() {
   const [user, setUser] = useState(null);
   const [cartProducts, setCartProducts] = useState([]);
-  const [loading, setLoading] = useState(true); // Loading state
+  const [loading, setLoading] = useState(true); 
+  const [isDisabled, setIsDisabled] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (currentUser) => {
       if (currentUser) {
         try {
-          const userDocRef = doc(db, "users", currentUser.uid); // Create doc reference
-          const userSnapshot = await getDoc(userDocRef); // Get the document
+          const userDocRef = doc(db, "users", currentUser.uid); 
+          const userSnapshot = await getDoc(userDocRef); 
           if (userSnapshot.exists()) {
-            setUser(userSnapshot.data().FullName); // Set user FullName to state
+            setUser(userSnapshot.data().FullName); 
           }
         } catch (error) {
           console.error("Error fetching user data:", error);
@@ -34,7 +35,7 @@ function Cart() {
       }
     });
 
-    // Clean up subscription to prevent memory leaks
+    
     return () => unsubscribe();
   }, []);
 
@@ -42,10 +43,10 @@ function Cart() {
     setLoading(true);
     const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
       if (user) {
-        // Reference to the Cart collection for the signed-in user
+        
         const cartCollectionRef = collection(db, "Cart" + user.uid);
 
-        // Listen for real-time updates using onSnapshot
+        
         const unsubscribeSnapshot = onSnapshot(
           cartCollectionRef,
           (snapshot) => {
@@ -61,7 +62,7 @@ function Cart() {
           }
         );
 
-        // Cleanup the onSnapshot listener when the component unmounts
+        
         return () => unsubscribeSnapshot();
       } else {
         console.log("User is not signed in to retrieve cart");
@@ -69,7 +70,7 @@ function Cart() {
       }
     });
 
-    // Cleanup the onAuthStateChanged listener when the component unmounts
+    
     return () => unsubscribeAuth();
   }, []);
 
@@ -93,7 +94,7 @@ function Cart() {
   
   
 
-  // global variable
+  
   let Product;
 
   // cart product increase function
@@ -102,14 +103,12 @@ function Cart() {
     Product = cartProduct;
     Product.qty = Product.qty + 1;
     Product.TotalProductPrice = Product.qty * Product.ProductPrice;
-    //updating in database
-    // Check the authenticated user
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        // Reference to the specific cart item in Firestore
+        
         const productRef = doc(db, "Cart" + user.uid, cartProduct.ID);
 
-        // Update the document in Firestore
+        
         updateDoc(productRef, {
           qty: Product.qty,
           TotalProductPrice: Product.TotalProductPrice,
@@ -126,22 +125,21 @@ function Cart() {
     });
   };
 
-  // cart product decrease function
+  
   const cartProductDecrease = (cartProduct) => {
-    //console.log(cartProduct);
+    
     Product = cartProduct;
     if (Product.qty > 1) {
       Product.qty = Product.qty - 1;
       Product.TotalProductPrice = Product.qty * Product.ProductPrice;
     }
-    //updating in database
-    // Check the authenticated user
+    
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        // Reference to the specific cart item in Firestore
+        
         const productRef = doc(db, "Cart" + user.uid, cartProduct.ID);
 
-        // Update the document in Firestore
+        
         updateDoc(productRef, {
           qty: Product.qty,
           TotalProductPrice: Product.TotalProductPrice,
@@ -178,22 +176,30 @@ function Cart() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        const cartRef = collection(db, "Cart" + user.uid); // Get reference to Cart collection
+        const cartRef = collection(db, "Cart" + user.uid); 
 
-        // Listen to the cart collection and update the total number of products
+        
         const unsubscribeSnapshot = onSnapshot(cartRef, (snapshot) => {
-          const qty = snapshot.docs.length; // Count the documents in the snapshot
-          setTotalProducts(qty); // Set the total products count in the state
+          const qty = snapshot.docs.length; 
+          setTotalProducts(qty); 
         });
 
-        // Cleanup snapshot listener when the component unmounts
+        
         return () => unsubscribeSnapshot();
       }
     });
 
-    // Cleanup auth listener when the component unmounts
+    
     return () => unsubscribe();
   }, []);
+
+  useEffect(() => {
+    if (cartProducts.length > 0) {
+      setIsDisabled(false);
+    } else {
+      setIsDisabled(true);
+    }
+  }, [cartProducts]);
 
   return (
     <>
@@ -206,7 +212,7 @@ function Cart() {
       ) : (
         <>
           {cartProducts.length > 0 && (
-            <div className="container py-10 px-6 lg:px-48">
+            <div className=" py-10 px-6 lg:px-48">
               <div className="flex flex-col lg:flex-row justify-between items-center lg:items-start font-poppins space-y-6 lg:space-y-0">
                 <span className="text-2xl lg:text-4xl">Your Cart</span>
                 <Link to="/">
@@ -239,7 +245,7 @@ function Cart() {
           )}
 
           {cartProducts.length < 1 && (
-            <div className="container flex flex-col items-center justify-center space-y-6 font-poppins py-20 lg:py-36">
+            <div className=" flex flex-col items-center justify-center space-y-6 font-poppins py-20 lg:py-36">
               <div className="text-2xl lg:text-4xl">Your cart is empty</div>
               <div>
                 <Link to="/">
@@ -253,19 +259,19 @@ function Cart() {
         </>
       )}
 
-      <div className="container border-t border-solid border-gray-400 py-6 px-44">
+      <div className="border-t border-solid border-gray-400 py-6 px-4 sm:px-10 md:px-20 lg:px-44">
         <div>
           <p className="text-gray-500">Order special instructions</p>
         </div>
-        <div className="flex flex-row justify-between mt-4">
-          <div className="w-1/2">
+        <div className="flex flex-col md:flex-row justify-between mt-4">
+          <div className="w-full md:w-1/2">
             <textarea
               name=""
               id=""
               className="border border-solid border-gray-400 w-full h-32 p-2"
             ></textarea>
           </div>
-          <div className="w-1/2 flex flex-col items-end space-y-4">
+          <div className="w-full md:w-1/2 flex flex-col md:items-end space-y-4 mt-4 md:mt-0 sm:items-start">
             <div className="text-gray-500 flex space-x-3">
               <span>Total NO of products</span>
               <span className="text-lg text-black">{totalQty}</span>
@@ -277,17 +283,26 @@ function Cart() {
             <div className="text-gray-400 text-sm">
               taxes and shipping are calculated at checkout
             </div>
-            <div className="w-1/2">
-              <button className="w-full py-2 bg-black text-white hover:scale-105 font-poppins" onClick={() => {
-                navigate('/checkout');
-              }}>
+            <div className="w-full md:w-1/2">
+              <button
+                className={`w-full py-2 bg-black text-white hover:scale-105 font-poppins ${
+                  isDisabled
+                    ? "bg-gray-400 text-gray-700 cursor-not-allowed"
+                    : "hover:bg-green-600"
+                }`}
+                onClick={() => {
+                  navigate("/checkout");
+                }}
+                disabled={isDisabled}
+              >
                 Check out
               </button>
             </div>
           </div>
         </div>
       </div>
-      <Footer/>
+
+      <Footer />
     </>
   );
 }

@@ -13,6 +13,8 @@ import Modal2 from "../components/Modal2.jsx";
 import Footer from "../components/Footer.jsx";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "../index.css";
+
 
 
 function Home() {
@@ -125,25 +127,28 @@ function Home() {
   return (
     <>
       <Nav user={user} totalProducts={totalProducts} />
-      <Hero />
-      <Main addToCart={addToCart} />
-      <Parallax />
-      <Modal />
-      <Modal2 />
-      <Footer />
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="colored"
-        transition={Bounce}
-      />
+      <div className="overflow-x-hidden">
+        
+        <Hero />
+        <Main addToCart={addToCart} />
+        <Parallax />
+        <Modal />
+        <Modal2 />
+        <Footer />
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="colored"
+          transition={Bounce}
+        />
+      </div>
     </>
   );
 }

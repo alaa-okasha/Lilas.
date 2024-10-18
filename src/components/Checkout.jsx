@@ -144,12 +144,12 @@ function Checkout() {
   return (
     <>
       <Navcheckout />
-      <div className="grid grid-cols-2">
-        <div className="pr-16 pl-56">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="pr-4 md:pr-16 pl-4 md:pl-4 lg:pl-16">
           <div className="w-full">
             <form className="w-full pt-3" onSubmit={handleOrderSubmit}>
               <div>
-                <p className="text-xl   my-3">Contact</p>
+                <p className="text-xl my-3">Contact</p>
                 <input
                   type="email"
                   required
@@ -160,15 +160,15 @@ function Checkout() {
                 />
               </div>
               <div>
-                <p className="text-xl   my-3">Delivery</p>
-                <div className="flex justify-between">
+                <p className="text-xl my-3">Delivery</p>
+                <div className="flex flex-col md:flex-col md:space-y-3 lg:space-y-0 lg:flex-row justify-between">
                   <input
                     type="text"
                     required
                     value={firstName}
                     onChange={handleFirstNameChange}
                     placeholder="First name"
-                    className="w-64 border border-gray-300 py-3 px-3 rounded-md"
+                    className="w-full lg:w-1/2 border border-gray-300 py-3 px-3 rounded-md mb-3 md:mb-0"
                   />
                   <input
                     type="text"
@@ -176,7 +176,7 @@ function Checkout() {
                     value={LastName}
                     onChange={handleLastNameChange}
                     placeholder="Last name"
-                    className=" border border-gray-300 py-3 px-3 rounded-md"
+                    className="w-full lg:w-1/2 border border-gray-300 py-3 px-3 rounded-md"
                   />
                 </div>
                 <div className="mt-3">
@@ -189,23 +189,23 @@ function Checkout() {
                     className="w-full border border-gray-300 py-3 px-3 rounded-md"
                   />
                 </div>
-                <div className="flex justify-between mt-3">
+                <div className="flex flex-col md:flex-col md:space-y-3 lg:space-y-0 lg:flex-row justify-between mt-3">
                   <input
                     type="text"
                     value={City}
                     onChange={handleCityChange}
                     placeholder="City"
                     required
-                    className="w-64 border border-gray-300 py-3 px-3 rounded-md"
+                    className="w-full lg:w-1/2 border border-gray-300 py-3 px-3 rounded-md mb-3 md:mb-0"
                   />
                   <select
                     value={governorate}
                     onChange={handleGovernorateChange}
-                    className=" w-52 border border-gray-300 py-3 px-3 rounded-md"
+                    className="w-full lg:w-1/2 border border-gray-300 py-3 px-3 rounded-md"
                     required
                   >
                     {egyptGovernorates.map((governorate, index) => (
-                      <option key={index} value={governorate} className="">
+                      <option key={index} value={governorate}>
                         {governorate}
                       </option>
                     ))}
@@ -224,8 +224,7 @@ function Checkout() {
                 </div>
                 <button
                   type="submit"
-                  className=" mt-3 w-full text-center bg-black text-white text-lg py-4 rounded-md font-poppins"
-                  
+                  className="mt-3 w-full text-center bg-black text-white text-lg py-4 rounded-md font-poppins"
                 >
                   Complete order
                 </button>
@@ -246,9 +245,9 @@ function Checkout() {
             </form>
           </div>
         </div>
-        <div className="bg-zinc-100 h-screen pl-16 pr-56 font-poppins pt-16 shadow-xl">
+        <div className="bg-zinc-100 h-screen pl-4 md:pl-16 pr-4 md:pr-16 lg:pr-56 font-poppins pt-16 shadow-xl">
           <div className="flex flex-col space-y-4">
-            {loading ? ( // Show spinner while loading
+            {loading ? (
               <div className="flex justify-center items-center h-full">
                 <ClipLoader size={50} color={"#123abc"} loading={loading} />
               </div>
@@ -296,6 +295,8 @@ function Checkout() {
           </div>
         </div>
       </div>
+
+      
     </>
   );
 }

@@ -8,6 +8,8 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Notfound from "./components/Notfound";
 import Checkout from "./components/Checkout";
+import "./index.css";
+
 
 function App() {
   return (

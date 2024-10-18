@@ -14,7 +14,7 @@ function Login() {
 
   const handelLogin = (e) => {
     e.preventDefault();
-    signInWithEmailAndPassword(auth, email, password) // Updated Firebase v9 method
+    signInWithEmailAndPassword(auth, email, password) 
       .then(() => {
         setSuccessMsg(
           "Login successful, you will be redirected to the Home page"
@@ -30,7 +30,7 @@ function Login() {
       .catch((error) => setErrorMsg(error.message));
   };
   return (
-    <div className="container flex flex-col px-60 py-14 font-poppins">
+    <div className="container flex flex-col px-4 sm:px-8 md:px-16 lg:px-24 xl:px-60 py-14 font-poppins">
       <div className="font-poppins text-3xl">
         <p>Login</p>
       </div>
@@ -57,7 +57,7 @@ function Login() {
           <div>
             <input
               type="password"
-              placeholder="password"
+              placeholder="Password"
               className="w-full p-2 rounded-md mt-8 border-2 border-solid border-gray-400"
               required
               onChange={(e) => {
@@ -66,9 +66,9 @@ function Login() {
               value={password}
             />
           </div>
-          <div className="flex flex-row justify-between">
-            <div>
-              <span className="mr-1">Don't have an account ? SignUp</span>
+          <div className="flex flex-col sm:flex-row justify-between items-center">
+            <div className="mb-4 sm:mb-0">
+              <span className="mr-1">Don't have an account? Sign Up</span>
               <Link to="/signup">
                 <span className="text-blue-500">Here</span>
               </Link>

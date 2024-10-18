@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { auth, db } from "../config/Confij.jsx";
 import { useNavigate } from "react-router-dom";
-import { createUserWithEmailAndPassword } from "firebase/auth"; // Firebase Auth
-import { doc, setDoc } from "firebase/firestore"; // Firestore functions
+import { createUserWithEmailAndPassword } from "firebase/auth"; 
+import { doc, setDoc } from "firebase/firestore"; 
 
 function Signup() {
       const navigate = useNavigate();
@@ -22,13 +22,13 @@ function Signup() {
           console.log(userCredential);
           const user = userCredential.user;
 
-          // Set user data in Firestore
-          const userRef = doc(db, "users", user.uid); // Create a document reference
+          
+          const userRef = doc(db, "users", user.uid); 
 
           setDoc(userRef, {
             FullName: fullName,
             Email: email,
-            Password: password, // Storing plain passwords is not recommended
+            Password: password, 
           })
             .then(() => {
               setSuccessMsg("Signed up successfully, you will be redirected to the Login page");
@@ -38,7 +38,7 @@ function Signup() {
               setErrorMsg("");
               setTimeout(() => {
                 setSuccessMsg("");
-                navigate("/login"); // Redirect to login after success
+                navigate("/login"); 
               }, 3000);
             })
             .catch((error) => setErrorMsg(error.message));
@@ -49,7 +49,7 @@ function Signup() {
 
   };
   return (
-    <div className="container flex flex-col px-60 py-14 font-poppins">
+    <div className="container flex flex-col px-4 md:px-10 lg:px-20 xl:px-60 py-14 font-poppins">
       <div className="font-poppins text-3xl">
         <p>Sign Up</p>
       </div>
@@ -97,9 +97,9 @@ function Signup() {
               value={password}
             />
           </div>
-          <div className="flex flex-row justify-between">
-            <div>
-              <span className="mr-1">Already have an account ? Login</span>
+          <div className="flex flex-col md:flex-row justify-between">
+            <div className="mb-4 md:mb-0">
+              <span className="mr-1">Already have an account? Login</span>
               <Link to="/login">
                 <span className="text-blue-500">Here</span>
               </Link>
